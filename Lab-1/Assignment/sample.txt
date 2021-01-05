@@ -1,0 +1,17 @@
+#include<stdio.h>
+
+int main(void)
+{
+    // sample comment
+    printf("Hello");
+    /*
+       here, 
+        *hi,this is the multi *
+        line 
+        comment
+    */
+    printf("World");
+
+
+}
+

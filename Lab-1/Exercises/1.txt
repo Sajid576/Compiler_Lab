@@ -1,0 +1,12 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+// Driver program to test above function
+int main()
+{
+    int n = 100;
+    cout << "Primes smaller than " << n << ":n";
+    segmentedSieve(n);
+    return 0;
+}
