@@ -1,1 +1,1 @@
-#include<stdio.h> int main(void) { printf("Hello"); printf("World"); } 
+#include<stdio.h> #include<stdio.h> int main( void ) { if ( 1 ) { } int i = 1; for (;i < 3; i++ ) printf(" ok "); 	printf ("Hello a \n"); 	printf ("World \t b"); 	 return 0; } void dummy( int a) { }

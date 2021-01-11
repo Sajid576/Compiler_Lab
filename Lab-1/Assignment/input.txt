@@ -1,17 +1,34 @@
 #include<stdio.h>
 
-int main(void)
+          #include<stdio.h>
+
+
+int main( void             )
 {
-    // sample comment
-    printf("Hello");
-    /*
-       here, 
-        *hi,this is the multi *
-        line 
-        comment
-    */
-    printf("World");
+    if (  1        )
+    {
+    }
+
+    int          i      = 1;
+    for (;i        <         3; i++ )
+        printf("  ok      ");
+
+	printf   ("Hello       a        \n");
+
+    /*aksdks /*asjdajsd*/
+    /*" kasjdk kljaas d            "*/
+
+	printf    ("World \t b");
 
 
+	              return       0;
+
+
+    //asd akjdal lkjklj lkasd
+    //asd akjdal lkjklj lkasd
 }
 
+void dummy(  int a)
+{
+
+}
