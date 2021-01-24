@@ -26,4 +26,22 @@ char keyword[32][100]={
       printf("%s is a keyword",str);
    else
       printf("%s is not a keyword",str);
+
+
+      
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

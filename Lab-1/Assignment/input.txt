@@ -1,34 +1,16 @@
-#include<stdio.h>
-
-          #include<stdio.h>
-
-
-int main( void             )
+// A program fragment
+float x1 = 3.125;
+/* Definition of the
+function f1 */
+double f1(int x)
 {
-    if (  1        )
-    {
-    }
-
-    int          i      = 1;
-    for (;i        <         3; i++ )
-        printf("  ok      ");
-
-	printf   ("Hello       a        \n");
-
-    /*aksdks /*asjdajsd*/
-    /*" kasjdk kljaas d            "*/
-
-	printf    ("World \t b");
-
-
-	              return       0;
-
-
-    //asd akjdal lkjklj lkasd
-    //asd akjdal lkjklj lkasd
+ double z;
+ z = 0.01;
+ return z;
 }
-
-void dummy(  int a)
+//* Beginning of 'main'
+int main(void)
 {
-
+ int n1; double z;
+ n1=25; z=f1(n1);
 }
