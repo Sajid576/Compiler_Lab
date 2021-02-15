@@ -1,1 +1,1 @@
-char c; int x1, x_2; float y1, y2; x1=5; x_2= 10; y1=2.5+x1*45; y2=100.o5-x_2/3; if(y1<=y2) c='y'; else c='n';
+float dummy(float a){a+++;return 0.99;}int main(void){dummy(0.0aa99);int x=1,i=0;float axas000=1;for(;i<=3;i++);int 0aaa,0.001a;int @y;int hh=0x01; hh= hh+-hh; return 0;}

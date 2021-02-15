@@ -24,12 +24,12 @@ char operators[27][5]={
 
 
 
-void showLables(char *lexeme,int categoryNo)
+void showTokens(char *lexeme,int categoryNo)
 {
     printf("[");
     if(categoryNo==1)
     {
-        printf("%s",lexeme);
+        printf(" %s",lexeme);
     }
     else if(categoryNo==2)
     {
@@ -37,23 +37,23 @@ void showLables(char *lexeme,int categoryNo)
     }
     else if(categoryNo==3)
     {
-        printf("%s",lexeme);
+        printf(" %s",lexeme);
     }
     else if(categoryNo==4)
     {
-        printf("%s",lexeme);
+        printf(" %s",lexeme);
     }
     else if(categoryNo==5)
     {
-        printf("%s",lexeme);
+        printf(" %s",lexeme);
     }
     else if(categoryNo==6)
     {
-        printf("%s",lexeme);
+        printf(" %s",lexeme);
     }
     else if(categoryNo==7)
     {
-        printf("%s",lexeme);
+        printf(" %s",lexeme);
     }
 
 
@@ -75,21 +75,37 @@ int main(void)
     {
         while((c = fgetc(p1)) != EOF)
         {
+
             if(c=='+'||c=='-'|| c=='*'|| c=='/'|| c=='%'||c=='='|| c=='>'|| c=='<'|| c=='!'|| c=='|' || c=='&')
             {
                 char str[3];
                 str[0] = c;
                 c = fgetc(p1);
-                if(c=='+'||c=='-'|| c=='*'|| c=='/'|| c=='%'||c=='='|| c=='>'|| c=='<'|| c=='!'|| c=='|' || c=='&')
+                if((str[0]=='+' && c=='+')||(str[0]=='-' && c=='-')||(str[0]=='+' &&  c=='=' )
+                ||(str[0]=='-' && c=='=')|| (str[0]=='*' && c=='=')|| (str[0]=='/' && c=='=')|| 
+                (str[0]=='=' && c=='=') || (str[0]=='!' && c=='=') || (str[0]=='<' && c=='=') ||
+                (str[0]=='>' && c=='=') || (str[0]=='&' && c=='&') || (str[0]=='|' && c=='|'))
                 {
                     str[1] = c;
-                    str[2] = '\0';
-                    showLables(str,3);
+                    c = fgetc(p1);
+                    if(c=='+'||c=='-'|| c=='*'|| c=='/'|| c=='%'||c=='='|| c=='>'|| c=='<'|| c=='!'|| c=='|' || c=='&')
+                    {
+                        str[2]=c;
+                        str[3] = '\0';
+                        showTokens(str,7);
+                    }
+                    else 
+                    {
+                        str[2] = '\0';
+                        showTokens(str,3);
+                    }
+
+                   
                 }
                 else
                 {
                     str[1] = '\0';
-                    showLables(str,3);
+                    showTokens(str,3);
                 }
         
             }
@@ -97,8 +113,6 @@ int main(void)
             if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
             {
                 char str[50];
-
-
                 str[0] = c;
                 int i=1;
                 while(1) 
@@ -121,11 +135,11 @@ int main(void)
                 }
                 if(flag==1)
                 {
-                    showLables(str,1);
+                    showTokens(str,1);
                 }
                 else
                 {
-                    showLables(str,2);
+                    showTokens(str,2);
                 }
                 
 
@@ -140,14 +154,20 @@ int main(void)
                 while(1) 
                 {
                     c = fgetc(p1);
-                    if(((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')  || c == '_'))
+                   
+                    if( c == '.')
+                    {
+                        
+                    }
+                    if ((c >= '0' && c <= '9') )
+                    {
+                        if(c=='x' || (c >= 'A' && c <= 'F') )
+                        str[i++] = c;
+                    }
+                    else  if(((c >= 'a' && c <= 'z' ) || (c >= 'G' && c <= 'Z')  || c == '_'))
                     {
                         str[i++] = c;
                         flag=1;
-                    }
-                    else if ((c >= '0' && c <= '9') || c == '.')
-                    {
-                        str[i++] = c;
                     }
                     else break;
                     
@@ -155,11 +175,11 @@ int main(void)
                 str[i] = '\0';
                 if(flag==1)
                 {//error
-                     showLables(str,7);
+                     showTokens(str,7);
                 }
                 else
                 {//number
-                     showLables(str,6);
+                     showTokens(str,6);
                 }
             }
 
@@ -169,7 +189,7 @@ int main(void)
                 char str[3];
                 str[0] = c;
                 str[1] = '\0';
-                showLables(str,5);
+                showTokens(str,5);
             }
             if (c == ';'|| c==',')
             {
@@ -178,7 +198,7 @@ int main(void)
                 
                 str[0] = c;
                 str[1] = '\0';
-                showLables(str,4);
+                showTokens(str,4);
             }
             
 
