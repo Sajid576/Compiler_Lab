@@ -208,7 +208,7 @@ void symbolTableGenerate(){
             name2[indx2] = '\0';
             bool found = 0;
             int in;
-            for( in=1;in<rowNum;++in){
+            for( in=1;in<rowNum;++in){ 
                 if(strcmp(store[in].name, name2)==0 && strcmp(store[in].scope, scopeDet[i])==0){
                     found = 1;
                     break;
