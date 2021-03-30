@@ -1,0 +1,21 @@
+#include<stdio.h>
+#include<string.h>
+/*Program Starts*/
+float func(int x))
+{
+int y;;
+for(y; x, ){} //for loop
+return 1.5;
+}}
+int int main()
+{
+{
+int a=1;
+float b;
+if(c)
+a=2;
+b=func(a);
+else
+a=0;
+return 0;
+}
