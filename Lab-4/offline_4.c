@@ -3,8 +3,9 @@
 #include<string.h>
 
 
-FILE *p1, *p2;
+FILE *p1, *p2,*p3;
 char c;
+int line_no=1;
 struct table
 {
     char num[10];
@@ -16,69 +17,93 @@ struct table
 struct table myTable[100];
 int tableSize=0;
 
-
 void addLineNumberRemoveComment()
 {
-    char lna[10];
-    int ln = 1, x;
-
-    p1 = fopen("input.txt", "r");
-    p2 = fopen("withLineNumberRemovedComment.txt", "w");
-
-    if(!p1)
-        printf("\nFile can't be opened!");
-    else
-    {
-        itoa(ln, lna, 10);
-        for(x=0; x < strlen(lna); x++)
-            fputc(lna[x], p2);
-        fputc(' ', p2);
-
+        p1 = fopen("input.txt", "r");
+        p2 = fopen("line_no_add.txt", "w");
+        if(!p1)
+        {
+            printf("\nFile can't be opened!");
+        }
+        else
+        {
+        fprintf(p2, "%d ", line_no);
         while((c = fgetc(p1)) != EOF)
         {
-            if(c == '/')
-            {
-                c = fgetc(p1);
-                if(c == '/')
-                    while (c != '\n')
-                        c = fgetc(p1);
-                else if(c == '*')
-                {
-                    while (c != '/')
-                        c = fgetc(p1);
-                    c = fgetc(p1);
-                }
-            }
-
-            while(c!='\n')
+            if(c == '\n')
             {
                 fputc(c, p2);
-                if(c == ' ')
-                {
-                    c = fgetc(p1);
-                    while (c == ' ')
-                        c = fgetc(p1);
-                    fputc(c, p2);
-                }
+                line_no = line_no + 1;
+                fprintf(p2, "%d ", line_no);
                 c = fgetc(p1);
+                if(c=='\n')
+                {
+                    fputc(c, p2);
+                    line_no = line_no + 1;
+                    fprintf(p2, "%d ", line_no);
+                    while((c = fgetc(p1)) == '\n')
+                    {
+                        fputc(c, p2);
+                        line_no = line_no + 1;
+                        fprintf(p2, "%d ", line_no);
+                    }
+                }
             }
-
-            fputc('\n', p2);
-            ln++;
-            itoa(ln, lna, 10);
-            for(x=0; x < strlen(lna); x++)
-                fputc(lna[x], p2);
-            fputc(' ', p2);
+            fputc(c, p2);
+          }
+        }
+        fclose(p1);
+        fclose(p2);
+        p2 = fopen("line_no_add.txt", "r");
+        p3 = fopen("Remove_comment.txt", "w");
+        if(!p2)
+        {
+            printf("\nFile can't be opened!");
+        }
+        else
+        {
+            while((c = fgetc(p2)) != EOF)
+            {
+                if(c == '/')
+                {      
+                    c = fgetc(p2);
+                    if(c == '/')
+                    {
+                        while (c != '\n')
+                        {
+                            c = fgetc(p2);
+                        }
+                    }
+                    else if(c == '*'){
+                    while(1)
+                    {
+                        if(((c = fgetc(p2))=='*'))
+                        {
+                            c = fgetc(p2);
+                            if(c=='/')
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    c = fgetc(p2);
+                    }
+                }
+                fputc(c, p3);
         }
     }
-    fclose(p1);
-    fclose(p2);
+
+        fclose(p2);
+        fclose(p3);
+
 }
+
+
 
 
 void separateLexim()
 {
-    p1 = fopen("withLineNumberRemovedComment.txt", "r");
+    p1 = fopen("Remove_comment.txt", "r");
     p2 = fopen("lexim.txt", "w");
 
     int b = 0;
@@ -144,12 +169,9 @@ void separateLexim()
     fclose(p2);
 }
 
-
-
-
 void unbalancedBracketsElse()
 {
-
+    
     char str[10000];
     p1 = fopen("lexim.txt", "r");
     int cntB = 0, cntE = 0, ln = 1;
@@ -264,20 +286,7 @@ int checkIdentifier(char s[])
             return 0;
         n++;
     }
-    if(ret == 1)
-    {
-        fputc('i', p2);
-        fputc('d', p2);
-        fputc(' ', p2);
-        int len = strlen(s), n=0;
-        while(n<len)
-        {
-            fputc(s[n], p2);
-            n++;
-        }
-        fputc(' ', p2);
-    }
-    return ret;
+   
 }
 
 void addIdentifier()

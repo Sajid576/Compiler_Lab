@@ -6,6 +6,8 @@
 #include<stdlib.h>
 #include<string.h>
 
+
+char strLine[100];
 char c;
 FILE *p1,*p2,*p3;
 int line_no=1;
@@ -162,7 +164,8 @@ void separateLexim()
 void detectUnbalancedCurlyBraces()
 {
     
-    printf("\n");
+    p3 = fopen("output.txt", "w");
+    fputs("\n", p3);
     char str[10000];
     p1 = fopen("lexim.txt", "r");
     int paranthesisCnt=0,curlyBraceCnt=0, ln = 1;
@@ -193,6 +196,12 @@ void detectUnbalancedCurlyBraces()
             else
             {
                 printf("Imbalanced parathesis at line %d\n",ln-1);
+               itoa(ln-1, strLine, 10);
+               char temp[100];
+               strcpy(temp,"Imbalanced parathesis at line ");
+               strcat(temp,strLine);
+               fputs(temp, p3);
+               fputs("\n",p3);
             }
         }
         else if( strcmp(str, "}")==0)
@@ -203,6 +212,12 @@ void detectUnbalancedCurlyBraces()
             }
             else
             {
+                itoa(ln-1, strLine, 10);
+                char temp[100];
+                strcpy(temp,"Imbalanced curly braces at line ");
+                strcat(temp,strLine);
+                fputs(temp, p3);
+                fputs("\n",p3);
                  printf("Imbalanced curly braces found at line %d\n",ln-1);
             }
         }
@@ -211,9 +226,11 @@ void detectUnbalancedCurlyBraces()
        
     }
     fclose(p1);
+     fclose(p3);
 }
 void detectConsequentDuplicates()
 {
+     p3 = fopen("output.txt", "a");
     char str1[10000];
     char str2[10000];
     p1 = fopen("lexim.txt", "r");
@@ -230,6 +247,15 @@ void detectConsequentDuplicates()
 
         if( (strcmp(str1, str2) == 0) && (strcmp(str1, "=")!=0 && strcmp(str1, "}")!=0 && strcmp(str1, ")")!=0 && strcmp(str1, "{")!=0 && strcmp(str1, "(")!=0) )
         {
+           
+            itoa(ln-1, strLine, 10);
+            char er[100];
+            strcpy(er,"Duplicate lexim found [ ");
+            strcat(er,str1 );
+            strcat(er,"] at line ");
+            strcat(er,strLine );
+            fputs(er, p3);
+            fputs("\n",p3);
             printf("\nDuplicate lexim found [%s] at line %d", str1, ln-1);
         }
 
@@ -237,14 +263,16 @@ void detectConsequentDuplicates()
         strcpy(str1,str2);
     }
     fclose(p1);
+     fclose(p3);
 }
 
 char headerStorage[100][30];
 int headerStorageSize=0;
+
 void detectHeaderFiles()
 {
-    FILE *p1;
-    
+   
+     p3 = fopen("output.txt", "a");
     p1=fopen("lexim.txt","r");
     
     if(!p1 )
@@ -255,16 +283,22 @@ void detectHeaderFiles()
     {
         char str[100];
         printf("\nHeader Files: ");
+        fputs("\nHeader Files: ",p3);
+        
         while(fscanf(p1, "%s", str)!=EOF)
         {
              if(strstr(str, ".h")!=NULL)
              {
                 strcpy( headerStorage[headerStorageSize++],str );
                  printf("%s ,", str);
+                fputs(str, p3);
+                fputs(",",p3);
              }
 
         }
     }
+    fclose(p3);
+
 }
 // Used to detect if the passed string is a header or not
 int isHeader(char *str){
@@ -295,7 +329,7 @@ void detectIdentifiers()
    };
 
     
-
+    p3 = fopen("output.txt", "a");
     p1=fopen("lexim.txt","r");
     
     if(!p1 )
@@ -306,6 +340,7 @@ void detectIdentifiers()
     {
         char str[100];
         printf("\nIdentifiers: ");
+        fputs("\nIdentifiers: ",p3);
         while(fscanf(p1, "%s", str)!=EOF)
         {
             char ch=str[0];
@@ -328,6 +363,8 @@ void detectIdentifiers()
                     {
                         //identifier
                         printf("%s ,",str);
+                        fputs(str,p3);
+                        fputs(",",p3);
                     }
                 
                 }
@@ -337,6 +374,8 @@ void detectIdentifiers()
         }
 
     }
+
+    fclose(p3);
 }
 
 void detectKeywords()
@@ -351,7 +390,7 @@ void detectKeywords()
    };
 
     
-
+    p3 = fopen("output.txt", "a");
     p1=fopen("lexim.txt","r");
     
     if(!p1 )
@@ -362,6 +401,7 @@ void detectKeywords()
     {
         char str[100];
         printf("\n Keywords: ");
+        fputs("\n Keywords: ",p3);
         while(fscanf(p1, "%s", str)!=EOF)
         {
             char ch=str[0];
@@ -379,6 +419,8 @@ void detectKeywords()
                 if(flag==1)
                 {
                     printf("%s ,",str);
+                   fputs(str, p3);
+                   fputs(",",p3);
                 }
 
             }
@@ -386,6 +428,7 @@ void detectKeywords()
         }
 
     }
+    fclose(p3);
 }
 
 
@@ -419,7 +462,7 @@ void detectFunctions()
    };
 
     
-
+    p3 = fopen("output.txt", "a");
     p1=fopen("lexim.txt","r");
     
     if(!p1 )
@@ -428,8 +471,11 @@ void detectFunctions()
     }
     else
     {
+       
+
         char str[100];
         printf("\nFunctions: ");
+        fputs("\nFunctions: ",p3);
         while(fscanf(p1, "%s", str)!=EOF)
         {
             char ch=str[0];
@@ -437,7 +483,7 @@ void detectFunctions()
             {
                 int flag=0;
                 int i;
-                
+            
                 for( i = 0; i < 32; i++) {
                     if(strcmp(str,keyword[i])==0) {
                         //keyword
@@ -457,6 +503,8 @@ void detectFunctions()
                         {//function
                             strcpy(functionStorage[functionStorageSize++],str);
                             printf("%s ,",str);
+                            fputs(str,p3);
+                            fputs(",",p3);
                         }
                         
                     }
@@ -468,6 +516,9 @@ void detectFunctions()
         }
 
     }
+
+    fclose(p3);
+
 }
 int main()
 {

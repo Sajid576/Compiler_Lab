@@ -1,24 +1,24 @@
-1 int int id main ( ) 
+1 int int ( ) 
 2 { 
-3 float id x1 = 6, id x2 = 1; 
-4 int float id x1 ; 
-5 id for id for ( ;x1 ; ) 
+3 float = 6, = 1; 
+4 int float ; 
+5 ( ;x1 ; ) 
 6 { 
-7 id x1 - - ; 
+7 - - ; 
 8 } 
-9 if ( id x1 ) ;if ( id x2 ) ;else ; else ; 
+9 if ( ) ;if ( ) ;else ; else ; 
 10 
-11 if ( id x1 ) ; 
-12 else if ( id x1 + + ) ; 
+11 if ( ) ; 
+12 else if ( + + ) ; 
 13 else ; 
 14 else ; 
 15 
-16 if ( id x1 == 1 ) id x1 + + ; 
-17 id x2 + + ; 
-18 else id x2 - - ; 
+16 if ( == 1 ) + + ; 
+17 + + ; 
+18 else - - ; 
 19 
 20 return 0 ; 
 21 } 
-22 void id f1 ( ) { {int id i ; id for ( ;i ; ) { { } } } 
-23 void id f2 ( ) { {int id i ; id for ( ;i ; ) { { } } } } } 
+22 void ( ) { {int ; ( ;i ; ) { { } } } 
+23 void ( ) { {int ; ( ;i ; ) { { } } } } } 
 24 
